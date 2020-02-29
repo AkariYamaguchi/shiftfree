@@ -10,11 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(version: 2020_02_28_033546) do
-=======
-ActiveRecord::Schema.define(version: 2020_02_24_053845) do
->>>>>>> 0491c38150b54b1884f368e4f35506506a9278f5
+ActiveRecord::Schema.define(version: 2020_02_29_022629) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,6 +41,20 @@ ActiveRecord::Schema.define(version: 2020_02_24_053845) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id"
+  end
+
+  create_table "likes", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "comment_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["comment_id"], name: "index_likes_on_comment_id"
+    t.index ["user_id"], name: "index_likes_on_user_id"
+  end
+
+  create_table "shift_applications", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "shift_users", force: :cascade do |t|

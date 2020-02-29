@@ -7,7 +7,9 @@ Rails.application.routes.draw do
   end
   root 'shift_users#index'
   resources :shift_users
-  resources :comments
+  resources :comments do
+    resources :likes, only: [:create]
+  end
 
   # registrations_controller.rbを使える設定
   devise_for :users, controllers: { registrations: 'users/registrations', omniauth_callbacks: 'users/omniauth_callbacks' }
