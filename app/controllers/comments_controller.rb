@@ -7,6 +7,7 @@ class CommentsController < ApplicationController
   # GET /comments.json
   def index
     @comments = Comment.all.order(created_at: :desc)
+    @like_comment_ids = current_user.likes.where(comment: @comments).pluck(:comment_id)
   end
 
   # GET /comments/1
@@ -54,6 +55,12 @@ class CommentsController < ApplicationController
       format.html { redirect_to comments_url, notice: 'Comment was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def likes
+    @comment = Comment.find(params[:id])
+    Like.find_by(comment_id: params[:id], user_id: current_user.id)&.destroy!
+    @like_comment_ids = current_user.likes.where(comment: @comment).pluck(:comment_id)
   end
 
   private

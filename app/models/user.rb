@@ -7,6 +7,7 @@ class User < ApplicationRecord
   validates :name, presence: true
   validates :profile, length: { maximum: 200 }
   has_many :shift_users
+  has_many :likes
 
   def self.find_for_oauth(auth)
     user = User.find_by(uid: auth.uid, provider: auth.provider)

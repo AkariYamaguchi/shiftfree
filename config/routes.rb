@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   root 'shift_users#index'
   resources :shift_users
   resources :comments do
+    delete 'likes', on: :member
     resources :likes, only: [:create]
   end
 

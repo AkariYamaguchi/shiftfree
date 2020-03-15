@@ -15,7 +15,9 @@
       <tr>
         <td><%= comment.user.name %></td>
         <td><%= comment.content %></td>
-        <td><%= link_to 'good!', comment_likes_path(comment), method: :post%></td>
+        <td id="comment-like-<%= comment.id %>">
+          <%= render partial: 'comments/like', locals: { like_comment_ids: @like_comment_ids, comment: comment } %>
+        </td>
         <td><%= link_to 'Show', comment %></td>
         <td><%= link_to 'Edit', edit_comment_path(comment) %></td>
         <td><%= link_to 'Destroy', comment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
